@@ -27,11 +27,11 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-project(Qt5CMakeTemplate
+project(UnknownKit
 	VERSION
 		0.1.0
 	DESCRIPTION
-		"Simple template for Qt5 to get you started"
+		UnknownKit
 )
 
 include("cmake/Qt5Helpers.cmake")
@@ -42,42 +42,42 @@ find_package(Qt5 REQUIRED CONFIG
 		Widgets
 )
 
-# Target MyApplication
-set(CMKR_TARGET MyApplication)
-set(MyApplication_SOURCES "")
+# Target UnknownKit
+set(CMKR_TARGET UnknownKit)
+set(UnknownKit_SOURCES "")
 
-list(APPEND MyApplication_SOURCES
-	"MyApplication/main.cpp"
-	"MyApplication/MainWindow.cpp"
-	"MyApplication/MainWindow.h"
-	"MyApplication/MainWindow.ui"
-	"MyApplication/resource.qrc"
+list(APPEND UnknownKit_SOURCES
+	"UnknownKit/main.cpp"
+	"UnknownKit/MainWindow.cpp"
+	"UnknownKit/MainWindow.h"
+	"UnknownKit/MainWindow.ui"
+	"UnknownKit/resource.qrc"
 )
 
-list(APPEND MyApplication_SOURCES
+list(APPEND UnknownKit_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${MyApplication_SOURCES})
-add_executable(MyApplication)
+set(CMKR_SOURCES ${UnknownKit_SOURCES})
+add_executable(UnknownKit)
 
-if(MyApplication_SOURCES)
-	target_sources(MyApplication PRIVATE ${MyApplication_SOURCES})
+if(UnknownKit_SOURCES)
+	target_sources(UnknownKit PRIVATE ${UnknownKit_SOURCES})
 endif()
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT MyApplication)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownKit)
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${MyApplication_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownKit_SOURCES})
 
-target_link_libraries(MyApplication PRIVATE
+target_link_libraries(UnknownKit PRIVATE
 	Qt5::Widgets
 )
 
 if(MSVC) # msvc
-	target_link_options(MyApplication PRIVATE
+	target_link_options(UnknownKit PRIVATE
 		"/SUBSYSTEM:WINDOWS"
 	)
 endif()
@@ -93,9 +93,9 @@ unset(CMKR_SOURCES)
 
 install(
 	TARGETS
-		MyApplication
+		UnknownKit
 	DESTINATION
 		bin
 	COMPONENT
-		MyApplication
+		UnknownKit
 )
