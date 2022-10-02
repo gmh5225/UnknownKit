@@ -1,6 +1,5 @@
-# Qt5CMakeTemplate
+# UnknownKit
 
-Simple template for Qt5 to get you started.
 
 ## Building
 
