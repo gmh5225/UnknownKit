@@ -3,9 +3,9 @@ version = "3.15"
 cmkr-include = "cmake/cmkr.cmake"
 
 [project]
-name = "Qt5CMakeTemplate"
+name = "UnknownKit"
 version = "0.1.0"
-description = "Simple template for Qt5 to get you started"
+description = "UnknownKit"
 include-after = ["cmake/Qt5Helpers.cmake"]
 
 [find-package]
@@ -14,11 +14,11 @@ Qt5 = { components = ["Widgets"] }
 [target.MyApplication]
 type = "executable"
 sources = [
-    "MyApplication/main.cpp",
-    "MyApplication/MainWindow.cpp",
-    "MyApplication/MainWindow.h",
-    "MyApplication/MainWindow.ui",
-    "MyApplication/resource.qrc",
+    "UnknownKit/main.cpp",
+    "UnknownKit/MainWindow.cpp",
+    "UnknownKit/MainWindow.h",
+    "UnknownKit/MainWindow.ui",
+    "UnknownKit/resource.qrc",
 ]
 link-libraries = ["Qt5::Widgets"]
 msvc.link-options = ["/SUBSYSTEM:WINDOWS"]
@@ -31,5 +31,5 @@ target_windeployqt(${CMKR_TARGET})
 """
 
 [[install]]
-targets = ["MyApplication"]
+targets = ["UnknownKit"]
 destination = "bin"
