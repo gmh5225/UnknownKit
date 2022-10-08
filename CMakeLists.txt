@@ -3,6 +3,10 @@
 
 cmake_minimum_required(VERSION 3.15)
 
+# Enable support for MSVC_RUNTIME_LIBRARY
+cmake_policy(SET CMP0091 NEW)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 	message(FATAL_ERROR "In-tree builds are not supported. Run CMake from a separate directory: cmake -B build")
 endif()
@@ -37,7 +41,7 @@ project(UnknownKit
 include("cmake/Qt5Helpers.cmake")
 
 # Packages
-find_package(Qt5 REQUIRED CONFIG
+find_package(Qt5 REQUIRED
 	COMPONENTS
 		Widgets
 )
@@ -81,6 +85,11 @@ if(MSVC) # msvc
 		"/SUBSYSTEM:WINDOWS"
 	)
 endif()
+
+set_target_properties(UnknownKit PROPERTIES
+	MSVC_RUNTIME_LIBRARY
+		"MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+)
 
 # Enable Qt moc/rrc/uic support
 target_qt(${CMKR_TARGET})

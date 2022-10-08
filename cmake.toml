@@ -7,11 +7,13 @@ name = "UnknownKit"
 version = "0.1.0"
 description = "UnknownKit"
 include-after = ["cmake/Qt5Helpers.cmake"]
+msvc-runtime = "static"
 
 [find-package]
 Qt5 = { components = ["Widgets"] }
 
 [target.UnknownKit]
+msvc-runtime = "dynamic"
 type = "executable"
 sources = [
     "UnknownKit/main.cpp",
