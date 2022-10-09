@@ -1,7 +1,5 @@
 # UnknownKit
 
-...
-
 
 ## Building
 
