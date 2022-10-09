@@ -41,9 +41,10 @@ project(UnknownKit
 include("cmake/Qt5Helpers.cmake")
 
 # Packages
-find_package(Qt5 REQUIRED
+find_package(Qt6 REQUIRED
 	COMPONENTS
 		Widgets
+		Core5Compat
 )
 
 # Target UnknownKit
@@ -77,7 +78,8 @@ endif()
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownKit_SOURCES})
 
 target_link_libraries(UnknownKit PRIVATE
-	Qt5::Widgets
+	Qt6::Widgets
+	Qt6::Core5Compat
 )
 
 if(MSVC) # msvc
@@ -86,16 +88,8 @@ if(MSVC) # msvc
 	)
 endif()
 
-set_target_properties(UnknownKit PROPERTIES
-	MSVC_RUNTIME_LIBRARY
-		"MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
-)
-
 # Enable Qt moc/rrc/uic support
 target_qt(${CMKR_TARGET})
-
-# Copy Qt DLLs next to the application
-target_windeployqt(${CMKR_TARGET})
 
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)

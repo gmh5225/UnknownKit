@@ -20,25 +20,17 @@ jobs:
     - name: Install ninja-build tool
       uses: seanmiddleditch/gha-setup-ninja@v3
 
-    - name: Cache Qt
-      id: cache-qt
-      uses: actions/cache@v1
-      with:
-        path: ../Qt
-        key: ${{ runner.os }}-QtCache
-
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2
-      with:
-        version: 5.15.2
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+    - name: Install Static Qt
+      run: |
+        Invoke-WebRequest https://github.com/gmh5225/static-build-qt6/releases/download/qt6_630_static/qt6_630_static_64.zip -OutFile .\qt6_630_static_64.zip
+        expand-archive -path "qt6_630_static_64.zip"
 
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.7.0
 
     - name: Build
       run: |
-        cmake -G Ninja -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} "-DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/install" -B build
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} "-DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/install" -DCMAKE_PREFIX_PATH=D:\a\UnknownKit\UnknownKit\qt6_630_static_64 -B build
         cmake --build build
         cmake --install build
 
