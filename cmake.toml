@@ -5,7 +5,6 @@ cmkr-include = "cmake/cmkr.cmake"
 [project]
 name = "UnknownKit"
 version = "0.1.0"
-description = "UnknownKit"
 include-after = ["cmake/Qt5Helpers.cmake"]
 msvc-runtime = "static"
 
