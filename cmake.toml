@@ -12,14 +12,13 @@ msvc-runtime = "static"
 [find-package]
 Qt6 = { components = ["Widgets", "Core5Compat"] }
 
-[target.UnknownKit]
+[target.UnknownKitGUI]
 type = "executable"
 sources = [
-    "UnknownKit/main.cpp",
-    "UnknownKit/MainWindow.cpp",
-    "UnknownKit/MainWindow.h",
-    "UnknownKit/MainWindow.ui",
-    "UnknownKit/resource.qrc",
+    "src/gui/**.cpp",
+    "src/gui/**.h",
+    "src/gui/**.ui",
+    "src/gui/**.qrc",
 ]
 link-libraries = ["Qt6::Widgets", "Qt6::Core5Compat"]
 msvc.link-options = ["/SUBSYSTEM:WINDOWS"]
@@ -29,5 +28,5 @@ target_qt(${CMKR_TARGET})
 """
 
 [[install]]
-targets = ["UnknownKit"]
+targets = ["UnknownKitGUI"]
 destination = "bin"
