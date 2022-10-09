@@ -47,43 +47,43 @@ find_package(Qt6 REQUIRED
 		Core5Compat
 )
 
-# Target UnknownKit
-set(CMKR_TARGET UnknownKit)
-set(UnknownKit_SOURCES "")
+# Target UnknownKitGUI
+set(CMKR_TARGET UnknownKitGUI)
+set(UnknownKitGUI_SOURCES "")
 
-list(APPEND UnknownKit_SOURCES
-	"UnknownKit/main.cpp"
-	"UnknownKit/MainWindow.cpp"
-	"UnknownKit/MainWindow.h"
-	"UnknownKit/MainWindow.ui"
-	"UnknownKit/resource.qrc"
+list(APPEND UnknownKitGUI_SOURCES
+	"src/gui/MainWindow.cpp"
+	"src/gui/main.cpp"
+	"src/gui/MainWindow.h"
+	"src/gui/MainWindow.ui"
+	"src/gui/resource.qrc"
 )
 
-list(APPEND UnknownKit_SOURCES
+list(APPEND UnknownKitGUI_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${UnknownKit_SOURCES})
-add_executable(UnknownKit)
+set(CMKR_SOURCES ${UnknownKitGUI_SOURCES})
+add_executable(UnknownKitGUI)
 
-if(UnknownKit_SOURCES)
-	target_sources(UnknownKit PRIVATE ${UnknownKit_SOURCES})
+if(UnknownKitGUI_SOURCES)
+	target_sources(UnknownKitGUI PRIVATE ${UnknownKitGUI_SOURCES})
 endif()
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownKit)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT UnknownKitGUI)
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownKit_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownKitGUI_SOURCES})
 
-target_link_libraries(UnknownKit PRIVATE
+target_link_libraries(UnknownKitGUI PRIVATE
 	Qt6::Widgets
 	Qt6::Core5Compat
 )
 
 if(MSVC) # msvc
-	target_link_options(UnknownKit PRIVATE
+	target_link_options(UnknownKitGUI PRIVATE
 		"/SUBSYSTEM:WINDOWS"
 	)
 endif()
@@ -96,9 +96,9 @@ unset(CMKR_SOURCES)
 
 install(
 	TARGETS
-		UnknownKit
+		UnknownKitGUI
 	DESTINATION
 		bin
 	COMPONENT
-		UnknownKit
+		UnknownKitGUI
 )
