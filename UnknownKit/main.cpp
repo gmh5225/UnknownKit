@@ -3,6 +3,7 @@
 #include <clocale>
 #include <cstdio>
 #include <QApplication>
+#include <QTextCodec>
 
 int
 main(int argc, char *argv[])

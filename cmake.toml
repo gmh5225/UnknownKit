@@ -10,10 +10,9 @@ include-after = ["cmake/Qt5Helpers.cmake"]
 msvc-runtime = "static"
 
 [find-package]
-Qt5 = { components = ["Widgets"] }
+Qt6 = { components = ["Widgets", "Core5Compat"] }
 
 [target.UnknownKit]
-msvc-runtime = "dynamic"
 type = "executable"
 sources = [
     "UnknownKit/main.cpp",
@@ -22,14 +21,11 @@ sources = [
     "UnknownKit/MainWindow.ui",
     "UnknownKit/resource.qrc",
 ]
-link-libraries = ["Qt5::Widgets"]
+link-libraries = ["Qt6::Widgets", "Qt6::Core5Compat"]
 msvc.link-options = ["/SUBSYSTEM:WINDOWS"]
 cmake-after = """
 # Enable Qt moc/rrc/uic support
 target_qt(${CMKR_TARGET})
-
-# Copy Qt DLLs next to the application
-target_windeployqt(${CMKR_TARGET})
 """
 
 [[install]]

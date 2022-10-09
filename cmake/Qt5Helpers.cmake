@@ -5,9 +5,6 @@
 set_property(GLOBAL PROPERTY AUTOGEN_SOURCE_GROUP "Generated Files")
 set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER "CMakePredefinedTargets")
 
-# Install Visual Studio runtime
-include(InstallRequiredSystemLibraries)
-
 # Helper function to enable moc/rcc/uic
 function(target_qt target)
     set_target_properties(${target} PROPERTIES
@@ -22,6 +19,9 @@ endfunction()
 
 # Helper function to deploy Qt DLLs
 function(target_windeployqt deploy_target)
+    # Install Visual Studio runtime
+    include(InstallRequiredSystemLibraries)
+
     # Based on: https://stackoverflow.com/a/41199492/1806760
     # TODO: set VCINSTALLDIR environment variable to copy MSVC runtime DLLs
     if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
