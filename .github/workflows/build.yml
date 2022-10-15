@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     # Skip building pull requests from the same repository
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != '${{ github.repository }}'
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -39,6 +39,12 @@ jobs:
       with:
         name: UnknownKit-${{ matrix.os }}
         path: install
+    
+    - name: Get lowercase OS name
+      id: osname
+      uses: ASzc/change-string-case-action@v1
+      with:
+        string: ${{ runner.os }}
         
     - name: Compress artifacts
       uses: vimtor/action-zip@v1
