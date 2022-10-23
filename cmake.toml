@@ -10,6 +10,7 @@ msvc-runtime = "static"
 [find-package]
 Qt6 = { components = ["Widgets", "Core5Compat"] }
 
+# tool: UnknownKitGUI
 [target.UnknownKitGUI]
 type = "executable"
 sources = [
@@ -26,6 +27,7 @@ cmake-after = """
 target_qt(${CMKR_TARGET})
 """
 
+# lib: UtilsLib
 [target.UtilsLib]
 type = "static"
 sources = ["src/lib/UtilsLib/**.cpp", "src/lib/UtilsLib/**.hpp", "src/lib/UtilsLib/**.h"]
