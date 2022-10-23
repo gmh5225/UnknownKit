@@ -19,12 +19,19 @@ sources = [
     "src/gui/**.ui",
     "src/gui/**.qrc",
 ]
-link-libraries = ["Qt6::Widgets", "Qt6::Core5Compat"]
+include-directories = ["include", "src/lib"]
+link-libraries = ["Qt6::Widgets", "Qt6::Core5Compat", "UtilsLib"]
 msvc.link-options = ["/SUBSYSTEM:WINDOWS"]
 cmake-after = """
 # Enable Qt moc/rrc/uic support
 target_qt(${CMKR_TARGET})
 """
+
+[target.UtilsLib]
+type = "static"
+sources = ["src/lib/UtilsLib/**.cpp", "src/lib/UtilsLib/**.hpp", "src/lib/UtilsLib/**.h"]
+include-directories = ["include"]
+
 
 [[install]]
 targets = ["UnknownKitGUI"]

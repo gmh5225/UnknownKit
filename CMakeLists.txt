@@ -34,8 +34,6 @@ endif()
 project(UnknownKit
 	VERSION
 		0.1.0
-	DESCRIPTION
-		UnknownKit
 )
 
 include("cmake/Qt5Helpers.cmake")
@@ -77,9 +75,15 @@ endif()
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UnknownKitGUI_SOURCES})
 
+target_include_directories(UnknownKitGUI PRIVATE
+	include
+	"src/lib"
+)
+
 target_link_libraries(UnknownKitGUI PRIVATE
 	Qt6::Widgets
 	Qt6::Core5Compat
+	UtilsLib
 )
 
 if(MSVC) # msvc
@@ -90,6 +94,36 @@ endif()
 
 # Enable Qt moc/rrc/uic support
 target_qt(${CMKR_TARGET})
+
+unset(CMKR_TARGET)
+unset(CMKR_SOURCES)
+
+# Target UtilsLib
+set(CMKR_TARGET UtilsLib)
+set(UtilsLib_SOURCES "")
+
+list(APPEND UtilsLib_SOURCES
+	"src/lib/UtilsLib/UtilsLib.Random.cpp"
+	"src/lib/UtilsLib/UtilsLib.cpp"
+	"src/lib/UtilsLib/UtilsLib.h"
+)
+
+list(APPEND UtilsLib_SOURCES
+	cmake.toml
+)
+
+set(CMKR_SOURCES ${UtilsLib_SOURCES})
+add_library(UtilsLib STATIC)
+
+if(UtilsLib_SOURCES)
+	target_sources(UtilsLib PRIVATE ${UtilsLib_SOURCES})
+endif()
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${UtilsLib_SOURCES})
+
+target_include_directories(UtilsLib PUBLIC
+	include
+)
 
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
