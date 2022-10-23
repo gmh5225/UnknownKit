@@ -31,10 +31,7 @@ if(CMKR_ROOT_PROJECT)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-project(UnknownKit
-	VERSION
-		0.1.0
-)
+project(UnknownKit)
 
 include("cmake/Qt5Helpers.cmake")
 
